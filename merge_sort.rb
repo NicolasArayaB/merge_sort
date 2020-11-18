@@ -1,48 +1,34 @@
 def merge_sort(arr)
   n = arr.size
-  b = []
-  c = []
   
-  if n == 2
-    b << arr[0]
-    c << arr[1]
-    merge(b.flatten, c.flatten, arr.flatten)
-  elsif n == 1
-    puts arr
-  elsif n > 1
-    b << arr[0..n/2]
-    c << arr[(n/2)..n]
-    merge_sort(b.flatten)
-    merge_sort(c.flatten)
-    merge(b.flatten, c.flatten, arr.flatten)
-  end
-end
-
-def merge(b, c, arr)
-  r = b.size
-  q = c.size
-  b_pointer = 0
-  c_pointer = 0
-  a_pointer = 0
-  b[b_pointer]
-
-  while b_pointer < r && c_pointer < q
-    if b[b_pointer] < c[c_pointer]
-      arr[a_pointer] = b[b_pointer]
-      b_pointer =+ 1
-    else
-      arr[a_pointer] = c[c_pointer]
-      c_pointer =+ 1
-    end
-    a_pointer =+ 1
-  end
-
-  if b_pointer == r
-    arr[a_pointer..r+q] << c[c_pointer..q]
+  if n < 2
+    arr
   else
-    arr[a_pointer..r+q] << b[b_pointer..p]
+      left = merge_sort(arr[0...n / 2])
+      right = merge_sort(arr[n / 2...n])
+      merge(left, right)  
   end
 end
 
+def merge(left, right)
+  ary = []
 
-merge_sort([2, 5, 3, 6])
+  until left.size == 0 || right.size == 0
+    if left[0] > right[0]
+      ary << right[0]
+      right -= [right[0]]
+    else
+      ary << left[0]
+      left -= [left[0]]
+    end
+  end
+
+  if left.size == 0
+    ary += right
+  else
+    ary += left
+  end
+  p ary
+end
+
+merge_sort([9, 2, 5, 3, 6, 1, 4, 7, 2, 1])
