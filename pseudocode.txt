@@ -4,10 +4,10 @@
       copy A[n/2..n] into C[1..n/2]
       merge(B[1..n/2])
       merge(C[1..n/2])
-      m(B,C,A)
+      m(B,C)
     
-    m(B[1..p], C[1..q], A[1..p+q])
-      Ib = 1, Ic = 1, Ia = 1
+    m(left, right)
+      
       while Ib <= p and Ic <= q
         if B[Ib] < C[Ic]
           A[Ia] = B[Ib]
