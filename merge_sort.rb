@@ -15,11 +15,9 @@ def merge(left, right)
 
   until left.size == 0 || right.size == 0
     if left[0] > right[0]
-      ary << right[0]
-      right -= [right[0]]
+      ary << right.shift
     else
-      ary << left[0]
-      left -= [left[0]]
+      ary << left.shift
     end
   end
 
